@@ -1,8 +1,10 @@
 import React from "react";
-import { mutipleChoice } from "./mui-models/models";
+import { findRandomComponent, multipleChoice } from "./function/index";
 
 function App() {
-  console.log(mutipleChoice("T"));
+  const randomCompoenet = findRandomComponent();
+  console.log(randomCompoenet);
+  console.log(multipleChoice(randomCompoenet));
   return <div className="App"></div>;
 }
 

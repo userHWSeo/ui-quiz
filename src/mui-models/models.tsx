@@ -15,7 +15,7 @@ import RadioButtonsGroup from "../mui_component/RadioButtonsGroup";
 import SimpleBadge from "../mui_component/SimpleBadge";
 import SimpleDialogDemo from "../mui_component/SimpleDialogDemo";
 
-const muiModels = [
+export const muiModels = [
   { component: <AutoComplete />, name: "AutoComplete" },
   { component: <BasicButtonGroup />, name: "ButtonGroup" },
   { component: <BasicPagination />, name: "Pagination" },
@@ -33,9 +33,3 @@ const muiModels = [
   { component: <SimpleBadge />, name: "Badge" },
   { component: <SimpleDialogDemo />, name: "Dialog" },
 ];
-
-export const mutipleChoice = (answer: string) => {
-  const choiceList = [answer];
-  const randomNum = Math.floor(Math.random() * muiModels.length);
-  console.log(randomNum);
-};
