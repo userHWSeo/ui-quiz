@@ -7,6 +7,7 @@ interface CurrentComponent {
 
 export const findRandomComponent = () => {
   const randomNum = Math.floor(Math.random() * muiModels.length);
+  console.log(muiModels[randomNum]);
   return muiModels[randomNum];
 };
 

@@ -7,7 +7,6 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 function handleClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
   event.preventDefault();
-  console.info("You clicked a breadcrumb.");
 }
 
 export default function BreadCrumbs() {
@@ -31,7 +30,7 @@ export default function BreadCrumbs() {
       Core
     </Link>,
     <Typography key="3" color="text.primary">
-      Breadcrumb
+      What is this ?
     </Typography>,
   ];
 
