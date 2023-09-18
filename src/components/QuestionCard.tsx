@@ -8,9 +8,14 @@ import { styled } from "@mui/system";
 // Func
 import { findRandomComponent, multipleChoice } from "../function/index";
 
+// Components
+import MultipleChoiceComponent from "./MultipleChoice";
+
 const MainPaper = styled(Paper)({
   display: "flex",
+  flexDirection: "column",
   justifyContent: "center",
+  alignItems: "center",
   width: "50%",
   height: "80%",
   borderRadius: "2rem",
@@ -25,12 +30,23 @@ const ComponentCard = styled(Card)({
   alignItems: "center",
   width: "70%",
   height: "50%",
+  padding: "1rem",
 });
 
 export default function SimplePaper() {
+  const currentQuestion = findRandomComponent();
+  const multipleChoiceArr: string[] = multipleChoice(currentQuestion);
+  const answer = multipleChoiceArr.filter(
+    (choice) => currentQuestion.name === choice
+  )[0];
+
   return (
     <MainPaper>
-      <ComponentCard>{findRandomComponent().component}</ComponentCard>
+      <ComponentCard>{currentQuestion.component}</ComponentCard>
+      <MultipleChoiceComponent
+        multipleChoiceArr={multipleChoiceArr}
+        answer={answer}
+      />
     </MainPaper>
   );
 }

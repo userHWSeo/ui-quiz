@@ -7,7 +7,6 @@ interface CurrentComponent {
 
 export const findRandomComponent = () => {
   const randomNum = Math.floor(Math.random() * muiModels.length);
-  console.log(muiModels[randomNum]);
   return muiModels[randomNum];
 };
 
@@ -16,7 +15,6 @@ export const multipleChoice = (currentComponent: CurrentComponent) => {
   const mixingRandomNum = Math.floor(Math.random() * 4);
   while (true) {
     const randomNum = Math.floor(Math.random() * muiModels.length);
-    console.log(randomNum);
     if (currentComponent.name !== muiModels[randomNum].name) {
       if (multipleChoiceView.indexOf(muiModels[randomNum].name) === -1)
         multipleChoiceView.push(muiModels[randomNum].name);

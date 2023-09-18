@@ -1,6 +1,4 @@
-import React from "react";
 import QuestionCard from "./components/QuestionCard";
-import { findRandomComponent, multipleChoice } from "./function/index";
 import { Reset } from "styled-reset";
 import { styled } from "@mui/system";
 
