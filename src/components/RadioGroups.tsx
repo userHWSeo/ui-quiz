@@ -15,8 +15,6 @@ export default function RowRadioButtonsGroup({
     setChoiceValue(event.target.value);
   };
 
-  console.log(choiceValue);
-
   return (
     <FormControl>
       <RadioGroup

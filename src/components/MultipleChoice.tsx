@@ -3,9 +3,6 @@ import * as React from "react";
 // MUI Components
 import { styled } from "@mui/system";
 
-// Func
-import { multipleChoice } from "../function/index";
-
 // Components
 import RowRadioButtonsGroup from "./RadioGroups";
 

@@ -1,12 +1,14 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 
 // MUI Components
 import Paper from "@mui/material/Paper";
 import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import { styled } from "@mui/system";
 
 // Func
-import { findRandomComponent, multipleChoice } from "../function/index";
+import { questionModelList } from "../function/index";
 
 // Components
 import MultipleChoiceComponent from "./MultipleChoice";
@@ -33,20 +35,60 @@ const ComponentCard = styled(Card)({
   padding: "1rem",
 });
 
+const StepButton = styled(Button)(({ step }: { step: string }) => ({
+  width: "5rem",
+  height: "3rem",
+  color: "white",
+  backgroundColor:
+    step === "next"
+      ? "green"
+      : step === "prev"
+      ? "red"
+      : step === "submit"
+      ? "#ffae00"
+      : "none",
+}));
+const StepButtonWrapper = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  width: "80%",
+});
+
 export default function SimplePaper() {
-  const currentQuestion = findRandomComponent();
-  const multipleChoiceArr: string[] = multipleChoice(currentQuestion);
-  const answer = multipleChoiceArr.filter(
-    (choice) => currentQuestion.name === choice
-  )[0];
+  const TOTAL_QUESTION_COUNT = 4;
+  const questionList = questionModelList();
+  const [currentQuestionCount, setCurrentQuestionCount] = useState(0);
+
+  const clickStepButton = (step: string) => {
+    if (step === "prev") return setCurrentQuestionCount((prev) => prev - 1);
+    if (step === "next") return setCurrentQuestionCount((prev) => prev + 1);
+  };
 
   return (
     <MainPaper>
-      <ComponentCard>{currentQuestion.component}</ComponentCard>
+      <ComponentCard>
+        {questionList[currentQuestionCount].component}
+      </ComponentCard>
       <MultipleChoiceComponent
-        multipleChoiceArr={multipleChoiceArr}
-        answer={answer}
+        multipleChoiceArr={questionList[currentQuestionCount].view}
+        answer={questionList[currentQuestionCount].name}
       />
+      <StepButtonWrapper>
+        {currentQuestionCount !== 0 ? (
+          <StepButton step="prev" onClick={() => clickStepButton("prev")}>
+            Prev
+          </StepButton>
+        ) : (
+          <div></div>
+        )}
+        {currentQuestionCount !== TOTAL_QUESTION_COUNT ? (
+          <StepButton step="next" onClick={() => clickStepButton("next")}>
+            Next
+          </StepButton>
+        ) : (
+          <StepButton step="submit">Submit</StepButton>
+        )}
+      </StepButtonWrapper>
     </MainPaper>
   );
 }
