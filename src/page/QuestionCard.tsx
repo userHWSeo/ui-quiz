@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 // MUI Components
 import Paper from "@mui/material/Paper";
@@ -12,6 +13,7 @@ import { questionModelList } from "../function/index";
 
 // Components
 import MultipleChoiceComponent from "../components/MultipleChoice";
+import ScoreView from "../components/ScoreView";
 
 const MainPaper = styled(Paper)({
   display: "flex",
@@ -54,13 +56,36 @@ const StepButtonWrapper = styled(Box)({
   width: "80%",
 });
 
+const StyledLink = styled(Link)({
+  textDecoration: "none",
+  color: "white",
+});
+
 const questionList = questionModelList();
+const answerList = questionList.map((question) => question.name);
 const userChoiceList: string[] = [];
 
 export default function SimplePaper() {
   const TOTAL_QUESTION_COUNT = 4;
   const [currentQuestionCount, setCurrentQuestionCount] = useState<number>(0);
   const [choiceValue, setChoiceValue] = useState<string>("");
+  const [score, setScore] = useState<number>(0);
+  const [submitToggle, setSubmitToggle] = useState<boolean>(false);
+
+  const clickSubmitButton = (
+    userChoiceList: string[],
+    answerList: string[]
+  ): void => {
+    let correctAnswerNum = 0;
+    userChoiceList.forEach((_, index) => {
+      if (userChoiceList[index] === answerList[index]) {
+        correctAnswerNum++;
+      }
+    });
+
+    setScore(correctAnswerNum);
+    setSubmitToggle(true);
+  };
 
   const clickStepButton = (step: string) => {
     setChoiceValue("");
@@ -71,12 +96,16 @@ export default function SimplePaper() {
     if (step === "next") {
       return setCurrentQuestionCount((prev) => prev + 1);
     }
-    if (step === "submit") return null;
+    if (step === "submit") return clickSubmitButton(userChoiceList, answerList);
     return console.log("clickStepButton Error");
   };
 
   console.log(userChoiceList);
-  console.log(questionList);
+  console.log(answerList);
+
+  if (submitToggle) {
+    return <ScoreView score={score} />;
+  }
 
   return (
     <MainPaper>
@@ -100,7 +129,9 @@ export default function SimplePaper() {
             Next
           </StepButton>
         ) : (
-          <StepButton step="submit">Submit</StepButton>
+          <StepButton step="submit" onClick={() => clickStepButton("submit")}>
+            Submit
+          </StepButton>
         )}
       </StepButtonWrapper>
     </MainPaper>
