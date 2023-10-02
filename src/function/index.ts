@@ -36,6 +36,7 @@ const multipleChoice = (currentComponent: CurrentComponent) => {
 
 export const questionModelList = () => {
   const resultList: Model[] = [];
+  // const
 
   for (let i = 0; i < 5; i++) {
     const randomCompoenet = findRandomComponent();

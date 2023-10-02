@@ -11,7 +11,7 @@ import { styled } from "@mui/system";
 import { questionModelList } from "../function/index";
 
 // Components
-import MultipleChoiceComponent from "./MultipleChoice";
+import MultipleChoiceComponent from "../components/MultipleChoice";
 
 const MainPaper = styled(Paper)({
   display: "flex",
@@ -54,15 +54,29 @@ const StepButtonWrapper = styled(Box)({
   width: "80%",
 });
 
+const questionList = questionModelList();
+const userChoiceList: string[] = [];
+
 export default function SimplePaper() {
   const TOTAL_QUESTION_COUNT = 4;
-  const questionList = questionModelList();
-  const [currentQuestionCount, setCurrentQuestionCount] = useState(0);
+  const [currentQuestionCount, setCurrentQuestionCount] = useState<number>(0);
+  const [choiceValue, setChoiceValue] = useState<string>("");
 
   const clickStepButton = (step: string) => {
-    if (step === "prev") return setCurrentQuestionCount((prev) => prev - 1);
-    if (step === "next") return setCurrentQuestionCount((prev) => prev + 1);
+    setChoiceValue("");
+    userChoiceList[currentQuestionCount] = choiceValue;
+    if (step === "prev") {
+      return setCurrentQuestionCount((prev) => prev - 1);
+    }
+    if (step === "next") {
+      return setCurrentQuestionCount((prev) => prev + 1);
+    }
+    if (step === "submit") return null;
+    return console.log("clickStepButton Error");
   };
+
+  console.log(userChoiceList);
+  console.log(questionList);
 
   return (
     <MainPaper>
@@ -71,7 +85,7 @@ export default function SimplePaper() {
       </ComponentCard>
       <MultipleChoiceComponent
         multipleChoiceArr={questionList[currentQuestionCount].view}
-        answer={questionList[currentQuestionCount].name}
+        setChoiceValue={setChoiceValue}
       />
       <StepButtonWrapper>
         {currentQuestionCount !== 0 ? (

@@ -1,4 +1,7 @@
-import QuestionCard from "./components/QuestionCard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import QuestionCard from "./page/QuestionCard";
+import HomeScreen from "./page/HomeScreen";
 import { Reset } from "styled-reset";
 import { styled } from "@mui/system";
 
@@ -12,10 +15,15 @@ const AppBackground = styled("div")({
 
 function App() {
   return (
-    <AppBackground className="App">
-      <Reset />
-      <QuestionCard />
-    </AppBackground>
+    <BrowserRouter>
+      <AppBackground className="App">
+        <Reset />
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/quiz" element={<QuestionCard />} />
+        </Routes>
+      </AppBackground>
+    </BrowserRouter>
   );
 }
 
