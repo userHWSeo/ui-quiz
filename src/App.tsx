@@ -15,7 +15,7 @@ const AppBackground = styled("div")({
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <AppBackground className="App">
         <Reset />
         <Routes>
