@@ -16,15 +16,12 @@ const AppBackground = styled("div")({
 function App() {
   return (
     <AppBackground className="App">
-      <div>TEST2</div>
-      <BrowserRouter>
+      <div>TEST3</div>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Reset />
         <Routes>
-          <Route path={process.env.PUBLIC_URL + "/"} element={<HomeScreen />} />
-          <Route
-            path={process.env.PUBLIC_URL + "/quiz"}
-            element={<QuestionCard />}
-          />
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/quiz" element={<QuestionCard />} />
         </Routes>
       </BrowserRouter>
     </AppBackground>
