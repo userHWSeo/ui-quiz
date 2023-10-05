@@ -13,15 +13,20 @@ const AppBackground = styled("div")({
   backgroundColor: "#10154b",
 });
 
+console.log(process.env.PUBLIC_URL);
+
 function App() {
   return (
     <AppBackground className="App">
       <div>TEST3</div>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <BrowserRouter>
         <Reset />
         <Routes>
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/quiz" element={<QuestionCard />} />
+          <Route path={process.env.PUBLIC_URL + "/"} element={<HomeScreen />} />
+          <Route
+            path={process.env.PUBLIC_URL + "/quiz"}
+            element={<QuestionCard />}
+          />
         </Routes>
       </BrowserRouter>
     </AppBackground>
