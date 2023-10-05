@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import QuestionCard from "./page/QuestionCard";
 import HomeScreen from "./page/HomeScreen";
@@ -17,13 +17,13 @@ function App() {
   return (
     <AppBackground className="App">
       <div>TEST1</div>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <HashRouter basename={process.env.PUBLIC_URL}>
         <Reset />
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/quiz" element={<QuestionCard />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AppBackground>
   );
 }
