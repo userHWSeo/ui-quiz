@@ -16,15 +16,18 @@ const MultipleChoiceView = styled("div")({
 
 export default function MultipleChoiceComponent({
   multipleChoiceArr,
+  choiceValue,
   setChoiceValue,
 }: {
   multipleChoiceArr: string[];
+  choiceValue: string;
   setChoiceValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
     <MultipleChoiceView>
       <RowRadioButtonsGroup
         choiceView={multipleChoiceArr}
+        choiceValue={choiceValue}
         setChoiceValue={setChoiceValue}
       />
     </MultipleChoiceView>

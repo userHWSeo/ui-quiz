@@ -54,4 +54,4 @@ export const questionModelList = () => {
   return resultList;
 };
 
-console.log(questionModelList());
+questionModelList();

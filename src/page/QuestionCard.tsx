@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 // MUI Components
 import Paper from "@mui/material/Paper";
@@ -14,6 +13,7 @@ import { questionModelList } from "../function/index";
 // Components
 import MultipleChoiceComponent from "../components/MultipleChoice";
 import ScoreView from "../components/ScoreView";
+import CircularIndeterminate from "../mui_component/CircularIndeterminate";
 
 const MainPaper = styled(Paper)({
   display: "flex",
@@ -56,11 +56,6 @@ const StepButtonWrapper = styled(Box)({
   width: "80%",
 });
 
-const StyledLink = styled(Link)({
-  textDecoration: "none",
-  color: "white",
-});
-
 const questionList = questionModelList();
 const answerList = questionList.map((question) => question.name);
 const userChoiceList: string[] = [];
@@ -71,6 +66,7 @@ export default function SimplePaper() {
   const [choiceValue, setChoiceValue] = useState<string>("");
   const [score, setScore] = useState<number>(0);
   const [submitToggle, setSubmitToggle] = useState<boolean>(false);
+  const [loadingToggle, setLoadingToggle] = useState<boolean>(false);
 
   const clickSubmitButton = (
     userChoiceList: string[],
@@ -88,6 +84,7 @@ export default function SimplePaper() {
   };
 
   const clickStepButton = (step: string) => {
+    setLoadingToggle(false);
     setChoiceValue("");
     userChoiceList[currentQuestionCount] = choiceValue;
     if (step === "prev") {
@@ -96,14 +93,26 @@ export default function SimplePaper() {
     if (step === "next") {
       return setCurrentQuestionCount((prev) => prev + 1);
     }
-    if (step === "submit") return clickSubmitButton(userChoiceList, answerList);
+    if (step === "submit") {
+      setLoadingToggle(true);
+      return clickSubmitButton(userChoiceList, answerList);
+    }
     return console.log("clickStepButton Error");
   };
 
-  console.log(userChoiceList);
-  console.log(answerList);
+  useEffect(() => {
+    setTimeout(() => setLoadingToggle(true), 500);
+  }, [currentQuestionCount]);
 
-  if (submitToggle) {
+  if (!loadingToggle) {
+    return (
+      <MainPaper>
+        <CircularIndeterminate />
+      </MainPaper>
+    );
+  }
+
+  if (loadingToggle && submitToggle) {
     return <ScoreView score={score} />;
   }
 
@@ -114,6 +123,7 @@ export default function SimplePaper() {
       </ComponentCard>
       <MultipleChoiceComponent
         multipleChoiceArr={questionList[currentQuestionCount].view}
+        choiceValue={choiceValue}
         setChoiceValue={setChoiceValue}
       />
       <StepButtonWrapper>
