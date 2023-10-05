@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "https://userhwseo.github.io/ui-quiz/static/js/main.af3dbb5e.js",
+    "static/js/787.5aaa82e3.chunk.js": "https://userhwseo.github.io/ui-quiz/static/js/787.5aaa82e3.chunk.js",
+    "index.html": "https://userhwseo.github.io/ui-quiz/index.html",
+    "main.af3dbb5e.js.map": "https://userhwseo.github.io/ui-quiz/static/js/main.af3dbb5e.js.map",
+    "787.5aaa82e3.chunk.js.map": "https://userhwseo.github.io/ui-quiz/static/js/787.5aaa82e3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.af3dbb5e.js"
+  ]
+}
