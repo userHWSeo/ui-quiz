@@ -13,8 +13,6 @@ const AppBackground = styled("div")({
   backgroundColor: "#10154b",
 });
 
-console.log(process.env.PUBLIC_URL);
-
 function App() {
   return (
     <HashRouter>
