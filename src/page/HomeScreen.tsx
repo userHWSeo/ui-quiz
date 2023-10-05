@@ -41,7 +41,7 @@ export default function HomeScreen() {
     <MainPaper>
       <TextAnimation text="Welcome to MUI Quiz 🎩"></TextAnimation>
       <StepButton>
-        <StyledLink to={`${process.env.PUBLIC_URL}/quiz`}>Play Quiz</StyledLink>
+        <StyledLink to={`$/quiz`}>Play Quiz</StyledLink>
       </StepButton>
     </MainPaper>
   );
